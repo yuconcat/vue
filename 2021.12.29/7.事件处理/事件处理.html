@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--  事件的使用
+          1.使用v-on:xxx 或 @xxx  绑定事件， xxx是事件名
+          2.事件的回调需要配置在methods对象中，最终会在vm上
+          3.methods中配置的函数，不要使用箭头函数，否则this就不是vm了
+          4.@click=“demo” 和@click=“demo($event,a)”效果一样，但后者可以传参
+    -->
+<div id="root">
+    <button @click="showfun1">点我提示信息（不传参）{{name}}</button>
+    <button @click="showfun2($event,66)">点我提示信息（传参）{{name}}</button>
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el:"#root",
+        data:{         //数据用了用户代理
+            name:"xxx"
+        },
+        methods:{     //没有做用户代理的
+            showfun1(){
+                alert("shu")
+            },
+            showfun2(event,a){
+                alert(a)
+            }
+        }
+    })
+</script>
+</html>

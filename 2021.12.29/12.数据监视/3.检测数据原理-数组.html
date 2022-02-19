@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="root">
+    <h2>{{name}}</h2>
+    <h2>{{address}}</h2>
+    <h2>{{student.name}}</h2>
+
+    <button @click="addsex">点我添加性别</button>
+    <h2 v-if="student.sex">{{student.sex}}</h2>
+
+    <h2>{{student.age.rage}}，{{student.age.sage}}</h2>
+    <h2>朋友</h2>
+    <ul>
+        <li v-for="(f,index) in student.friend" :key="index">
+            {{f.name}}
+        </li>
+    </ul>
+    <button @click="changehobby">点我添加爱好</button>
+    <h2>爱好</h2>
+    <ul>
+        <li v-for="(h,index) in student.hobby" :key="index">
+            {{h}}---{{index}}
+        </li>
+    </ul>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            name:"临川1中",
+            address:"北京",
+            student:{
+                name:"tom",
+                age:{
+                    rage:18,
+                    sage:20
+                },
+                friend:[
+                    {name:"jerry",age:19},
+                    {name:"jer",age:40}
+                ],
+                hobby:["抽烟","喝酒","烫头"]
+            }
+        },
+        methods:{
+            addsex(){
+                Vue.set(this.data.student,"sex","男")
+            },
+            changehobby(){
+                Vue.hobby.push("打桌球")
+            }
+        }
+    })
+
+//    vue对数组的操作想要响应式可用，必须要对数组进行修改
+//    可以使原数组发生改变的方法有：push,pop,shift,unshift,splice,sort,reverse（发生增减改变的方法）
+//    上面的这些方法，vue都全部改写过   vm._data.student.hobby.push === Array.prototype.push  (false)
+//    直接修改数组里的元素vue是不会检测到的
+</script>
+
+</html>

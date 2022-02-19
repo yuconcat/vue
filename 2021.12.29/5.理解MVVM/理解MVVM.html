@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--view就是页面模板-->
+<div id="root">
+    {{name}}
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+
+    const vm = new Vue({     //view model就是 Vue 对象vm
+        el:"#root",
+        data:{              //model是data里的数据
+            name:"xxx"
+        }
+    });
+</script>
+
+</html>
+
+<!--view <=> view model <=> model
+    view model实时监听view里数据的改变，然后给到model里
+    view model把model里的数据传给view-->
+
+<!--在data里定义属性相当于在vm里添加了属性，
+    于是view里的{{xxx}}中的xxx可以查看到vm里的所有属性
+    而对于vm里没有的属性，xxx是不能使用的-->

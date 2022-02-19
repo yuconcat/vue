@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="root">
+    <h2>学校名称:{{name}}</h2>
+    <h2>学校地址:{{address}}</h2>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+
+    let data ={
+        name:"尚硅谷",
+        address:"北京"
+    }
+
+
+    //创建一个监视的实例对象，用于监视data中属性的变化
+    const obs = new Observer(data)
+
+    function Observer(obj) {
+    //    汇总对象中所有的属性形成一个数组
+        const keys = Object.keys(obj)
+    //    遍历
+        keys.forEach((k)=>{
+            //加了一层避免死循环
+            Object.defineProperty(this,k,{
+                get(){
+                    return obj[k]
+                },
+                set(val){
+                    console.log(`${k}被改了`)
+                    obj[k] = val
+                }
+            })
+        })
+    }
+
+
+    //    准备一个vm实例对象
+    let vm  = {}
+    vm._data = data = obs;
+
+    //3，最后把obs带给vm._data，vm里面会用一次defineProperty方便我们只用vm.name就能访问或修改
+    //4，总结一下就是vm做了obs的数据代理，obs又做了原始data的数据代理
+
+
+//    1.data里的数据经过数据加工
+//    2.vm._data = data
+//    3.修改了_data里面的name时会引起name应的set的调用
+//          而set里面写了一个调用 这个调用则会重新解析模板
+//          重新解析模板便会形成新的虚拟dom
+//          然后新旧dom对比
+//          然后更新页面
+</script>
+</html>

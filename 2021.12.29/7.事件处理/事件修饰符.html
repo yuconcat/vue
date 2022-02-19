@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    *{
+        margin-top: 20px;
+    }
+    #root{
+        height: 20px;
+    }
+    .demo1{
+        background-color: tomato;
+    }
+    .demo1 button{
+        margin: 10px;
+        background-color: yellow;
+    }
+    #x {
+        background-color: pink;
+    }
+</style>
+<body>
+<!--Vue中的事件修饰符
+       1.prevent：阻止默认事件
+       2.stop：阻止事件冒泡
+       3.once：事件只触发一次-->
+
+
+<div id="root">
+    <!--阻止默认事件：不加.prevent就会点完url弹出提示信息后就会默认页面跳转-->
+    <a href="http://www.baidu.com" @click.prevent="showinfo">点我提示信息</a>
+
+
+    <!--阻止事件冒泡：只有button的showinfo被执行-->
+    <!--不加.stop会冒泡，会从button到div使showinfo各执行一次-->
+    <div class="demo1" @click="showinfo">
+        <button @click.stop="showinfo">点我提示信息1</button>
+    </div>
+
+
+    <!--事件只触发一次：第一次点击会弹窗，后续的点击没效果-->
+    <button id="x" @click.once="showinfo">点我提示信息2</button>
+
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+
+    new Vue({
+        el:"#root",
+        methods:{
+            showinfo(){
+                alert("xxx")
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="root">
+    {{name}}
+</div>
+
+<div id="root1">
+    {{name}}
+</div>
+
+<!--一个重要的原则：由Vue管理的函数，一定不要写箭头函数，一旦写了箭头函数，this就不是Vue实例-->
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    //第一种方法
+    new Vue({
+        el:"#root",
+        data:{               //对象式
+            name:"xxx"
+        }
+    });
+
+    //第二种方法
+    const v = new Vue({
+        data:function () {   //函数式
+            return {
+                name:"xxx"
+            }
+        }
+    });
+    v.$mount("#root1");//创建Vue的对象v再用$mount()方法绑定容器
+
+</script>
+</html>

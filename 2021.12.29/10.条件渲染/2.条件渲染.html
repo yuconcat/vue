@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="root">
+    <!--使用v-show做条件渲染，底层调用display，适用于频繁使用，只是页面重绘-->
+    <h2 v-show="false">xxx{{name}}</h2>
+
+    <!--使用v-if做条件渲染，在html页面里不断添加和修改节点，会导致页面回流，页面不断重新排版-->
+    <!--使用v-if和v-else中间不能打断，否则不起效-->
+    <h2 v-if="false">xxx{{name}}</h2>
+    <h2 v-else="">yyy</h2>
+
+    <!--小demo-->
+    <h2>当前的n：{{n}}</h2>
+    <button @click="n++">点我n+1</button>
+    <div v-show="n === 1"> 1</div>
+    <div v-show="n === 2"> 2</div>
+    <div v-show="n === 3"> 3</div>
+
+    <!--v-if可以与templete配合使用，而且不会影响结构-->
+    <template v-if="n ===1">
+        <h2>1</h2>
+        <h2>2</h2>
+        <h2>3</h2>
+    </template>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            name:"xxx",
+            n:0
+            }
+
+    })
+</script>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="root">
+    <div>hellow{{name}}</div>
+    <div v-html="str">xxx</div>
+    <div v-text="str">xxx</div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:"#root",
+        data:{
+            name:"尚硅谷",
+            str:"<h3>hello</h3>"
+        }
+    })
+
+//      v-text和{{}}表达式渲染数据，不解析标签。  调用innerTEXT
+//      v-html不仅可以渲染数据，而且可以解析标签。 调用innerHTML
+//     注意：v-html有安全性问题
+//          1.在网站上动态渲染任意渲染HTML是非常危险，容易导致xss攻击
+//          2.一定要在可信的内容上使用v-html，永远不要在用户提交的内容上
+
+//    跨站脚本攻击（XSS攻击）：
+//          指的是恶意攻击者往Web页面里插入恶意html代码，当用户浏览该页之时，
+//          嵌入其中Web里面的html代码会被执行，从而达到恶意用户的特殊目的。
+</script>
+</html>

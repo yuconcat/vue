@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h2>天气{{info}}</h2>
+    </br>
+    <button @click="changeweather">切换天气</button>
+    </br>
+    <h>a:{{numbers.a}}</h>
+    </br>
+    <button @click="numbers.a++">点我a++</button>
+    </br>
+    <h>b:{{numbers.b}}</h>
+    </br>
+    <button @click="numbers.b++">点我b++</button>
+</div>
+</body>
+<script>
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            ishost:true,
+            numbers:{
+                a:1,
+                b:2
+            }
+        },
+        computed:{
+            info:{
+                get(){
+                    return this.ishost ? "炎热":"凉爽";
+                }
+            }
+        },
+        methods:{
+            changeweather(){
+                this.ishost = !this.ishost;
+            }
+        },
+        //监视属性
+        //正常写法
+        // watch:{
+        //     ishost:{
+        //         handler(newvalue,oldvalue){
+        //             console.log("修改前:"+newvalue+"--"+"修改后:"+oldvalue);
+        //         }
+        //     }
+        //
+        // }
+
+
+        // 简写
+        // 当只有一个handler()，没有其他乱七八糟的东西时，可以简写
+        watch:{
+            ishost(newvalue,oldvalue){
+                console.log("修改前:"+newvalue+"--"+"修改后:"+oldvalue);
+            }
+        }
+
+    })
+
+
+</script>
+</html>

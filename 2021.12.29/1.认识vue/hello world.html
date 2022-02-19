@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!-- 导入vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<!--
+1.Vue实例和容器一一对应
+2.开发中只会有一个Vue实例,且会配合组件一起使用
+3.{{xxx}}xxx要写js表达式,且xxx可以读取到data中所有的属性
+4.一旦data中的数据发生改变,那么页面中用到该数据的地方也会自动更新
+-->
+<body>
+<!--创建一个容器-->
+<div id="root">
+    hellow,{{name}}
+</div>
+</body>
+<script>
+    //创建Vue实例
+    const x = new Vue({
+        el:"#root", //el用于指定当前Vue实例为那个容器服务
+        data:{      //data用于存储数据,数据供el指定的容器使用
+            name:"world"
+        }
+    });
+</script>
+</html>

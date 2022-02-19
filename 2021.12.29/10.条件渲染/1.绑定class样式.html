@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .normal{
+
+    }
+    .happy{
+
+    }
+    .m1{
+
+    }
+    .m2{
+
+    }
+    .m3{
+
+         }
+</style>
+
+<body>
+<div id="root">
+    <!--绑定class样式 ---字符串写法，适用于：类名样式不确定，需要动态指定-->
+    <div class="basic" :class="mood" @click="changeMood">{{name}}</div>
+
+    <!--绑定class样式 ---数组写法，适用于：要绑定的样式个数不确定，名字也不确定-->
+    <div class="basic" :class="classArr" @click="changeMood1">{{name}}</div>
+
+    <!--绑定class样式 ---对象写法，适用于：要绑定的样式个数确定，名字也确定，但要动态决定用不用-->
+    <div class="basic" :class="classObj" @click="changeMood2">{{name}}</div>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:"#root",
+        data:{
+            name:"xxx",
+            mood:"normal",
+            classArr:["m1","m2","m3"],
+            classObj:{
+                m1:false,    //样式一不用
+                m2:true      //样式二用
+            }
+        },
+        methods:{
+            changeMood(){
+                this.mood = "haapy"
+            },
+            changeMood1(){
+                this.classArr
+            },
+            changeMood2(){
+                this.classObj
+            }
+        }
+    })
+</script>
+</html>

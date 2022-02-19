@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="root">
+    <h2 :style="{opacity:opacity}">hellow</h2>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:"#root",
+        data:{
+            opacity:1
+        },
+
+        //Vue完成模板的解析并把真实DOM元素放入页面后（挂载完毕）调用mounted
+        //而且mounted()的this已经调好为vm
+        mounted(){
+           setInterval(()=>{
+                this.opacity -= 0.01
+                if(this.opacity <= 0){
+                    this.opacity = 1
+                }
+            },10)
+        }
+    })
+
+
+//    生命周期：（生命周期钩子）
+//          1.Vue在关键时刻帮我们调用一些特殊名称的函数
+//          2.生命周期函数的名字不可更改，函数内容按需编写
+//          3.生命周期函数的this已经调好为vm或组件实例对象
+</script>
+</html>

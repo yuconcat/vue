@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="root">
+    <h2>{{name}}</h2>
+    <h2>{{address}}</h2>
+    <h2>{{student.name}}</h2>
+
+    <button @click="addsex">点我添加性别</button>
+    <!--这个属性没有在创建vue的时候就添加上-->
+    <!--v-if条件渲染，有就展示，没有就不展示-->
+    <h2 v-if="student.sex">{{student.sex}}</h2>
+
+    <h2>{{student.age.rage}}，{{student.age.sage}}</h2>
+    <h2>朋友</h2>
+    <ul>
+        <li v-for="(f,index) in student.friend" :key="index">
+            {{f.name}}---{{f.age}}
+        </li>
+    </ul>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            name:"临川1中",
+            address:"北京",
+            student:{
+                name:"tom",
+                age:{
+                    rage:18,
+                    sage:20
+                },
+                friend:[
+                    {name:"jerry",age:19},
+                    {name:"jer",age:40}
+                ]
+            }
+        },
+        methods:{
+            addsex(){
+                //    想要在后面添加具有响应式的数据必须使用set方法
+                //    （目标，键，值）
+                Vue.set(this.data.student,"sex","男")
+            }
+        }
+    })
+
+
+
+    // //这个api也可以使用,效果一模一样
+    // vm.$set(vm.data.student,"sex","男")
+
+//    set的局限性，只能给data里的一个属性里加，不能给data里加
+
+</script>
+
+</html>

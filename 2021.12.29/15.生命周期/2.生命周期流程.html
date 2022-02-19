@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--https://www.bilibili.com/video/BV1Zy4y1K7SH?p=49-->
+<!--https://www.bilibili.com/video/BV1Zy4y1K7SH?p=50-->
+<!--https://www.bilibili.com/video/BV1Zy4y1K7SH?p=51-->
+
+<div id="root">
+    <h2 :style="{opacity:opacity}">hellow</h2>
+    <button @click="stop">点我停止</button>
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    //vm的生命周期有四对
+//          将要创建        beaforeCreate
+//              （创建的东西是数据检测和数据代理）
+//          创建完毕        Create
+
+//          将要挂载        beaforeMount
+//              （挂载是Dom是否被Vue编译）
+//          挂载完毕（重要）  mounted    进行初始化操作如：发送ajax、启动定时器、绑定自定义事件、订阅消息
+
+//          将要更新        beaforeUpdata
+//              （数据更新）
+//          更新完毕        updataed
+
+//          将要销毁（重要）  beaforeDestroy    首尾工作：如清除定时器、解绑自定义事件、取消订阅消息
+//              （vm被销毁）
+//          销毁完毕        destroyed
+
+    //关于销毁Vue实例
+    //      1.销毁后借助Vue开发工具看不到任何消息
+    //      2.销毁后自定义事件会失效，但原生DOM事件依然有效
+    //      3.一般不会在beaforeDestroy操作数据，因为即便操作数据，也不会再触发更新流程
+
+    new Vue({
+        el:"#root",
+        data:{
+            opacity:1
+        },
+        methods:{
+            //销毁vm
+            stop(){
+                this.$destroy()
+            }
+        },
+        //Vue完成模板的解析并把真实DOM元素放入页面后（挂载完毕）调用mounted
+        //而且mounted()的this已经调好为vm
+        mounted(){
+            this.timer = setInterval(()=>{
+                this.opacity -= 0.01
+                if(this.opacity <= 0){
+                    this.opacity = 1
+                }
+            },10)
+        },
+        //在vm销毁之前，将要被执行的事
+        beforeDestroy(){
+            console.log("vm销毁了，定时器也销毁了")
+            clearInterval(this.timer)
+        }
+    })
+</script>
+</html>
